@@ -1,11 +1,15 @@
 from django.db import models
 
 
+def week_day():
+    return ['pon', 'wto', 'śro', 'czw', 'pią']
+
+
 class Subject(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class Student(models.Model):
@@ -18,6 +22,7 @@ class Student(models.Model):
 
 
 class Event(models.Model):
+    parent_event = models.ForeignKey("self", on_delete=models.SET_NULL, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     """{start,end}_date fields are designated to store the first time event
@@ -30,12 +35,23 @@ class Event(models.Model):
     start_time = models.DateTimeField(default=None, blank=True, null=True)
     end_time = models.DateTimeField(default=None, blank=True, null=True)
 
+    """Determine amount of N weeks between each event (in most of the cases: 1 or 2)"""
+    separation_count = models.IntegerField(default=1)
+
+    day_of_week = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.subject.name + ' ' + week_day()[self.day_of_week] + ' ' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M')
+
+
+class Group(models.Model):
+    students = models.ManyToManyField(Student, blank=True)
+    classes = models.ManyToManyField(Event, blank=True)
+
 
 class RecurringPattern(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     max_occurences = models.IntegerField()
-    separation_count = models.IntegerField()
-    day_of_week = models.IntegerField()
 
 
 class EventException(models.Model):

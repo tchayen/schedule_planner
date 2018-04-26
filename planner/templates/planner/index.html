@@ -1,0 +1,9 @@
+{% if students_list %}
+    <ul>
+    {% for s in students_list %}
+        <li>{{ s }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>There are no students</p>
+{% endif %}

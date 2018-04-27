@@ -1,7 +1,13 @@
 # schedule planner
+Python classes assignment.
+
+App for viewing current schedule of a student, handling classes that are moved permanently, happen every N weeks, are moved occasionally and so on.
+
+**WIP**
 
 ## Roadmap
-- display plan
+- display calendar
+- add username/password authentication
 
 ## Recurring events system
 
@@ -13,13 +19,17 @@
 ## Database
 *NOTE: migrations are not version controlled*
 
+## Development config
+Mostly useful for me, but trying those values might help if something does not work.
+
+### database
 ```bash
 schedule_planner          # database name
 schedule_planner_user     # username
 schedule_planner_password # password
 ```
 
-## superuser
+### superuser
 ```bash
 admin                     # username
 adminadmin                # password

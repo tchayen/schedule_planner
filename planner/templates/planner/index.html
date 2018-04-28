@@ -1,20 +1,8 @@
+{% extends 'base.html' %}
+
+{% block calendar %}
+
 <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    }
-
-    .content {
-        padding: 20px 10px;
-        display: flex;
-        flex-direction: column;
-    }
-
     .calendar {
         display: flex;
     }
@@ -55,42 +43,11 @@
         opacity: 0.6;
         margin-top: 5px;
     }
-
-    .navigation {
-        display: flex;
-        margin: 0 0 20px 0;
-        padding: 0 10px;
-    }
-
-    .button {
-        display: inline;
-        text-decoration: none;
-        color: #fff;
-        border-radius: 4px;
-        font-size: 18px;
-        padding: 10px 15px;
-        background-color: #0050ff;
-        transition: 0.15s all;
-    }
-
-    .button:hover {
-        transition: 0.15s all;
-        opacity: 0.6;
-    }
-
-    .no-select {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
 </style>
 
 <div class="content">
     <div class="navigation">
-        <a href="#" class="button">Następny tydzień</a>
+        <a href="#" class="button">Next week</a>
     </div>
     {% if days %}
     <div class="calendar">
@@ -110,6 +67,7 @@
         {% endfor %}
     </div>
     {% else %}
-        <p>There are no events</p>
+        <p>There is nothing to do</p>
     {% endif %}
 </div>
+{% endblock %}

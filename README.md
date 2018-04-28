@@ -36,7 +36,7 @@ Now you can create the database:
 sudo su - postgres
 psql
 
-# Create the database
+# Create the database and user
 CREATE DATABASE schedule_planner;
 CREATE USER schedule_planner_user WITH PASSWORD 'schedule_planner_password';
 

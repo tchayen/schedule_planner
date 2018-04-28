@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Student, Subject, Event, RecurringPattern, EventException
+from .models import Student, Subject, Teacher, Event, EventException
 
 admin.site.register(Student)
 admin.site.register(Subject)
+admin.site.register(Teacher)
 admin.site.register(Event)
-admin.site.register(RecurringPattern)
 admin.site.register(EventException)

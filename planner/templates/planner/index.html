@@ -15,40 +15,43 @@
         flex-direction: column;
     }
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .days {
+    .calendar {
         display: flex;
     }
 
-    .events {
-        display: flex;
+    .day {
         flex-direction: column;
-        width: 100%;
-        margin: 0 10px;
+        display: flex;
+        flex: 1;
+    }
+
+    .slot {
+        display: flex;
+        height: 60px;
+        margin: 0 0 10px 0;
     }
 
     .event {
+        flex: 1;
         cursor: default;
         color: #000;
         background-color: #ccc;
         border-radius: 4px;
         padding: 10px 15px;
-        margin-bottom: 20px;
+        margin: 0 5px;
         display: flex;
         flex-direction: column;
     }
 
     .title {
-        font-size: 18px;
+        font-size: 17px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .time {
-        font-size: 14px;
+        font-size: 13px;
         opacity: 0.6;
         margin-top: 5px;
     }
@@ -90,18 +93,22 @@
         <a href="#" class="button">Następny tydzień</a>
     </div>
     {% if days %}
-        <ul class="days">
-        {% for d in days %}
-            <ul class="events">
-                {% for e in d %}
-                    <li class="event no-select">
-                        <span class="title">{{ e.subject.name }}</span>
-                        <span class="time">{{ e.timespan }}</span>
-                    </li>
+    <div class="calendar">
+        {% for day in days %}
+        <div class="day">
+            {% for slot in day %}
+            <div class="slot">
+                {% for event in slot %}
+                <div class="event no-select">
+                    <span class="title">{{ event.subject.name }}</span>
+                    <span class="time">{{ event.timespan }}</span>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
+            {% endfor %}
+        </div>
         {% endfor %}
-        </ul>
+    </div>
     {% else %}
         <p>There are no events</p>
     {% endif %}

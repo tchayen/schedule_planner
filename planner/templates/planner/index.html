@@ -48,6 +48,11 @@
 <div class="content">
     <div class="navigation">
         <a href="#" class="button">Next week</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="button">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="button">Login</a>
+        {% endif %}
     </div>
     {% if days %}
     <div class="calendar">

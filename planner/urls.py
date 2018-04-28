@@ -7,5 +7,5 @@ from planner.forms import CustomAuthForm
 urlpatterns = [
   path('', views.index, name='index'),
   url(r'^login/$', auth_views.login, name='login', kwargs={"authentication_form":CustomAuthForm}),
-  url(r'^logout/$', auth_views.logout, name='logout'),
+  url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 ]

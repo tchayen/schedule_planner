@@ -5,6 +5,14 @@ App for viewing current schedule of a student, handling classes that are moved p
 
 **WIP**
 
+## Running
+Just as a regular Django app
+```bash
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver
+```
+
 ## Roadmap
 - display calendar
 - add username/password authentication

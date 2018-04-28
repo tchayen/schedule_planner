@@ -57,19 +57,3 @@ Make sure you've installed both Django and psycop2 (the latter is not installed 
 ```
 pip install django psycopg2
 ```
-
-## Development config
-Mostly useful for me, but trying those values might help if something does not work.
-
-### database
-```bash
-schedule_planner          # database name
-schedule_planner_user     # username
-schedule_planner_password # password
-```
-
-### superuser
-```bash
-admin                     # username
-adminadmin                # password
-```

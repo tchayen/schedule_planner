@@ -7,13 +7,6 @@ from .models import Event
 from django.core.mail import send_mail
 
 def get_events(today):
-    send_mail(
-        'Subject',
-        'Message.',
-        'from@example.com',
-        ['john@example.com', 'jane@example.com'],
-    )
-
     first_day = today - timedelta(days=today.weekday())
     last_day = first_day + timedelta(days=5)
     events = [e for e in Event.objects.exclude(
@@ -44,7 +37,8 @@ def get_events(today):
 
 
 def index(request):
-    days = get_events(datetime.today())
+    result = get_events(datetime.today())
 
-    context = { 'days': days }
+    context = { 'days': result }
+
     return render(request, 'planner/index.html', context)

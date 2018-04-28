@@ -5,7 +5,7 @@
 <style>
     .calendar {
         display: flex;
-        margin: 0 10px;
+        margin: 0 15px;
     }
 
     p {
@@ -45,7 +45,7 @@
     .event {
         flex: 1;
         cursor: default;
-        color: #000;
+        color: #fff;
         background-color: #ccc;
         border-radius: 4px;
         padding: 0 15px;
@@ -60,7 +60,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        line-height: 1em;
         margin-top: 5px;
     }
 
@@ -91,7 +90,7 @@
                 {% for slot in day %}
                 <div class="slot">
                     {% for event in slot %}
-                    <div class="event no-select">
+                    <div class="event no-select" style="background-color: {{ event.subject.color }}">
                         <div class="title">{{ event.subject.name }}</div>
                         <div class="time">{{ event.timespan }}</div>
                     </div>

@@ -3,26 +3,32 @@
   pk: 1
   fields:
     name: 'Discrete mathematics'
+    color: '#A4036F'
 - model: planner.subject
   pk: 2
   fields:
     name: 'Numerical analysis'
+    color: '#048BA8'
 - model: planner.subject
   pk: 3
   fields:
     name: 'Calculus'
+    color: '#16DB93'
 - model: planner.subject
   pk: 4
   fields:
     name: 'Linear algebra'
+    color: '#6E44FF'
 - model: planner.subject
   pk: 5
   fields:
     name: 'Statistics'
+    color: '#F29E4C'
 - model: planner.subject
   pk: 6
   fields:
     name: 'Topology'
+    color: '#9A48D0'
 
 # Teachers
 - model: planner.teacher
@@ -105,3 +111,36 @@
     end_time: '16:15:00.000'
     separation_count: 1
     day_of_week: 1
+- model: planner.event
+  pk: 4
+  fields:
+    subject: 4
+    teacher: 4
+    start_date: '2018-04-01'
+    end_date: '2018-06-01'
+    start_time: '11:15:00.000'
+    end_time: '12:45:00.000'
+    separation_count: 1
+    day_of_week: 2
+- model: planner.event
+  pk: 5
+  fields:
+    subject: 5
+    teacher: 5
+    start_date: '2018-04-01'
+    end_date: '2018-06-01'
+    start_time: '19:30:00.000'
+    end_time: '21:00:00.000'
+    separation_count: 2
+    day_of_week: 3
+- model: planner.event
+  pk: 6
+  fields:
+    subject: 6
+    teacher: 6
+    start_date: '2018-04-01'
+    end_date: '2018-06-01'
+    start_time: '12:50:00.000'
+    end_time: '14:20:00.000'
+    separation_count: 1
+    day_of_week: 4

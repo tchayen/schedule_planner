@@ -52,9 +52,12 @@ def index(request):
 
     return render(request, 'planner/index.html', context)
 
-def calendar(request, first_day, last_day):
+def calendar(request, first_day):
     first_day = datetime.strptime(first_day, '%Y-%m-%d')
-    last_day = datetime.strptime(last_day, '%Y-%m-%d')
+    if first_day.weekday() != 0:
+        raise ValueError('Provided day must be monday')
+
+    last_day = first_day + timedelta(days=5)
 
     result = get_events(first_day, last_day)
 

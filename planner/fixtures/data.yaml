@@ -1,0 +1,47 @@
+# Subjects
+- model: planner.subject
+  pk: 1
+  fields:
+    name: 'Matematyka dyskretna'
+- model: planner.subject
+  pk: 1
+  fields:
+    name: 'Analiza numeryczna'
+- model: planner.subject
+  pk: 1
+  fields:
+    name: 'Analiza matematyczna'
+- model: planner.subject
+  pk: 1
+  fields:
+    name: 'Algebra liniowa'
+- model: planner.subject
+  pk: 1
+  fields:
+    name: 'Statystyka'
+- model: planner.subject
+  pk: 1
+  fields:
+    name: 'Topologia'
+
+# Events
+- model: planner.event
+  pk: 1
+  fields:
+    subject: 1
+    start_date: '2018-04-01'
+    end_date: '2018-06-01'
+    start_time: '12:50:00.000'
+    end_time: '14:20:00.000'
+    separation_count: 1
+    day_of_week: 1
+- model: planner.event
+  pk: 2
+  fields:
+    subject: 2
+    start_date: '2018-04-01'
+    end_date: '2018-06-01'
+    start_time: '14:40:00.000'
+    end_time: '16:15:00.000'
+    separation_count: 1
+    day_of_week: 1

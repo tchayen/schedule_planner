@@ -1,25 +1,9 @@
 from django.db import models
-
+from .subject import Subject
+from .teacher import Teacher
 
 def week_day():
-    return ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek']
-
-
-class Subject(models.Model):
-    name = models.CharField(max_length=128, unique=True, db_index=True)
-    color = models.CharField(max_length=7, blank=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Teacher(models.Model):
-    first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
-
-    def __str__(self):
-        return self.first_name + ' ' + self.last_name
-
+    return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
 class Event(models.Model):
     parent_event = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True)
@@ -47,18 +31,3 @@ class Event(models.Model):
 
     def __str__(self):
         return self.subject.name + ' ' + week_day()[self.day_of_week] + ' ' + self.timespan()
-
-
-class EventException(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    start_time = models.DateTimeField(default=None)
-    end_time = models.DateTimeField(default=None)
-
-
-class Student(models.Model):
-    first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
-    classes = models.ManyToManyField(Event, blank=True)
-
-    def __str__(self):
-        return self.first_name + ' ' + self.last_name

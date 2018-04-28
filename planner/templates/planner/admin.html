@@ -1,16 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .change-request {
+        background-color: #eee;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+</style>
 {% if user.is_superuser %}
 <div class="content">
     <div class="navigation">
         <a href="/" class="button">Back to calendar</a>
         <a href="{% url 'logout' %}" class="button">Logout</a>
     </div>
-    {% for request in change_requests %}
-        *
-    {% endfor %}
-  </div>
+    <div class="regular-content">
+        <h2>Change Requests</h2>
+        {% for request in change_requests %}
+            <div class="change-request">
+                <div>Requested by <strong>{{ request.author }}</strong></div>
+                <div>
+                    {{ request.meritum|safe }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endif %}
 {% endblock %}

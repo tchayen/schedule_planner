@@ -41,6 +41,11 @@ def get_events(first_day, last_day):
 def index(request):
     today = datetime.today()
     first_day = today - timedelta(days=today.weekday())
+
+    # If it is already saturday, show the next week
+    if today.weekday() >= 5:
+        first_day = first_day + timedelta(days=7)
+
     last_day = first_day + timedelta(days=5)
 
     previous_week = first_day - timedelta(days=7)

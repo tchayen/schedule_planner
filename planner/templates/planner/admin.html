@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="content">
+    <div class="navigation">
+        <a href="/" class="button">Back to calendar</a>
+        <a href="{% url 'logout' %}" class="button">Logout</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

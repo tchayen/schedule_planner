@@ -42,29 +42,40 @@ def index(request):
     first_day = today - timedelta(days=today.weekday())
     last_day = first_day + timedelta(days=5)
 
-    result = get_events(first_day, last_day)
+    previous_week = first_day - timedelta(days=7)
+    next_week = first_day + timedelta(days=7)
 
+    result = get_events(first_day, last_day)
     context = {
         'days': result,
         'first_day': first_day.strftime('%Y-%m-%d'),
         'last_day': last_day.strftime('%Y-%m-%d'),
+        'previous_week': previous_week.strftime('%Y-%m-%d'),
+        'next_week': next_week.strftime('%Y-%m-%d'),
     }
 
     return render(request, 'planner/index.html', context)
 
 def calendar(request, first_day):
     first_day = datetime.strptime(first_day, '%Y-%m-%d')
+    last_day = first_day + timedelta(days=5)
+
+    previous_week = first_day - timedelta(days=7)
+    next_week = first_day + timedelta(days=7)
+
     if first_day.weekday() != 0:
         raise ValueError('Provided day must be monday')
 
-    last_day = first_day + timedelta(days=5)
-
     result = get_events(first_day, last_day)
-
     context = {
         'days': result,
         'first_day': first_day.strftime('%Y-%m-%d'),
         'last_day': last_day.strftime('%Y-%m-%d'),
+        'previous_week': previous_week.strftime('%Y-%m-%d'),
+        'next_week': next_week.strftime('%Y-%m-%d'),
     }
 
     return render(request, 'planner/index.html', context)
+
+def admin(request):
+    return render(request, 'planner/admin.html', {})

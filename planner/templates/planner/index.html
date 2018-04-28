@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <style>
     .calendar {
         display: flex;
@@ -74,7 +73,8 @@
     <div class="navigation">
         {% if user.is_authenticated %}
             <div class="navigation-div">
-                <a href="#" class="button">Next week</a>
+                <a href="/{{ previous_week }}" class="button">Previous week</a>
+                <a href="/{{ next_week }}" class="button">Next week</a>
                 <span style="margin-left: 10px">
                     Week from
                     <strong>{{ first_day }}</strong>
@@ -84,6 +84,11 @@
             </div>
             <div class="navigation-div">
                 <span>Logged in as <strong>{{ user.get_username }}</strong></span>
+                {% if user.is_superuser %}
+                    <a href="/admin" class="button">Admin panel</a>
+                {% else %}
+                    <a href="/" class="button">Report change</a>
+                {% endif %}
                 <a href="{% url 'logout' %}" class="button">Logout</a>
             </div>
         {% else %}

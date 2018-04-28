@@ -5,5 +5,5 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'', include('planner.urls')),
-    path('admin/', admin.site.urls),
+    path('django_admin/', admin.site.urls),
 ]

@@ -1,10 +1,15 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
-from django.forms.widgets import PasswordInput, TextInput
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.forms.widgets import PasswordInput, TextInput, EmailInput
 
 
-"""This file provides a way to customize login form (i.e. add placeholders)
+"""This file provides a way to customize forms (i.e. add placeholders)
 """
-class CustomAuthForm(AuthenticationForm):
-    username = forms.CharField(widget=TextInput(attrs={'class': 'validate', 'placeholder': 'Email'}))
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput(attrs={'class': 'validate', 'placeholder': 'Username'}))
     password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'Password'}))
+    email = forms.CharField(widget=EmailInput(attrs={'class': 'validate', 'placeholder': 'Email'}))
+
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.CharField(widget=EmailInput(attrs={'class': 'validate', 'placeholder': 'Email'}))

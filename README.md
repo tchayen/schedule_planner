@@ -18,7 +18,8 @@ python3 manage.py runserver
 - ~~create and connect to the database~~
 - ~~create basic models~~
 - ~~display calendar properly~~
-- add username/password authentication
+- ~~add username/password authentication~~
+- create fixture containing realistic data
 - ...
 
 ## Database

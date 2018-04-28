@@ -48,10 +48,11 @@
         color: #000;
         background-color: #ccc;
         border-radius: 4px;
-        padding: 10px 15px;
+        padding: 0 15px;
         margin: 0 5px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 
     .title {
@@ -59,6 +60,8 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        line-height: 1em;
+        margin-top: 5px;
     }
 
     .time {
@@ -89,8 +92,8 @@
                 <div class="slot">
                     {% for event in slot %}
                     <div class="event no-select">
-                        <span class="title">{{ event.subject.name }}</span>
-                        <span class="time">{{ event.timespan }}</span>
+                        <div class="title">{{ event.subject.name }}</div>
+                        <div class="time">{{ event.timespan }}</div>
                     </div>
                     {% endfor %}
                 </div>

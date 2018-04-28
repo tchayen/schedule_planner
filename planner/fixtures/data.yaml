@@ -2,43 +2,103 @@
 - model: planner.subject
   pk: 1
   fields:
-    name: 'Matematyka dyskretna'
+    name: 'Discrete mathematics'
 - model: planner.subject
+  pk: 2
+  fields:
+    name: 'Numerical analysis'
+- model: planner.subject
+  pk: 3
+  fields:
+    name: 'Calculus'
+- model: planner.subject
+  pk: 4
+  fields:
+    name: 'Linear algebra'
+- model: planner.subject
+  pk: 5
+  fields:
+    name: 'Statistics'
+- model: planner.subject
+  pk: 6
+  fields:
+    name: 'Topology'
+
+# Teachers
+- model: planner.teacher
   pk: 1
   fields:
-    name: 'Analiza numeryczna'
-- model: planner.subject
-  pk: 1
+    first_name: Krzysztof
+    last_name: Rudol
+- model: planner.teacher
+  pk: 2
   fields:
-    name: 'Analiza matematyczna'
-- model: planner.subject
-  pk: 1
+    first_name: Jacek
+    last_name: Szybowski
+- model: planner.teacher
+  pk: 3
   fields:
-    name: 'Algebra liniowa'
-- model: planner.subject
-  pk: 1
+    first_name: Sergii
+    last_name: Kuzhel
+- model: planner.teacher
+  pk: 4
   fields:
-    name: 'Statystyka'
-- model: planner.subject
-  pk: 1
+    first_name: Witold
+    last_name: Majdak
+- model: planner.teacher
+  pk: 5
   fields:
-    name: 'Topologia'
+    first_name: Ewa
+    last_name: Szlachtowska
+- model: planner.teacher
+  pk: 6
+  fields:
+    first_name: Wojciech
+    last_name: Motyka
+- model: planner.teacher
+  pk: 7
+  fields:
+    first_name: Tomasz
+    last_name: Drwięga
+- model: planner.teacher
+  pk: 8
+  fields:
+    first_name: Maria
+    last_name: Malejki
+- model: planner.teacher
+  pk: 9
+  fields:
+    first_name: Anna
+    last_name: Wach-Michalik
 
 # Events
 - model: planner.event
   pk: 1
   fields:
     subject: 1
+    teacher: 1
     start_date: '2018-04-01'
     end_date: '2018-06-01'
-    start_time: '12:50:00.000'
-    end_time: '14:20:00.000'
+    start_time: '08:00:00.000'
+    end_time: '09:30:00.000'
     separation_count: 1
-    day_of_week: 1
+    day_of_week: 0
 - model: planner.event
   pk: 2
   fields:
     subject: 2
+    teacher: 2
+    start_date: '2018-04-01'
+    end_date: '2018-06-01'
+    start_time: '09:35:00.000'
+    end_time: '11:05:00.000'
+    separation_count: 1
+    day_of_week: 0
+- model: planner.event
+  pk: 3
+  fields:
+    subject: 3
+    teacher: 3
     start_date: '2018-04-01'
     end_date: '2018-06-01'
     start_time: '14:40:00.000'

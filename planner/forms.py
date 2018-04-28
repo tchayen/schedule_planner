@@ -3,8 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, Set
 from django.forms.widgets import PasswordInput, TextInput, EmailInput
 
 
-"""This file provides a way to customize forms (i.e. add placeholders)
-"""
+"""This file provides a way to customize forms (i.e. add placeholders)"""
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(widget=TextInput(attrs={'class': 'validate', 'placeholder': 'Username'}))

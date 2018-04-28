@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from datetime import datetime, timedelta
 from itertools import groupby
-from .models import Event
+from .models import Event, ChangeRequest
 from django.core.mail import send_mail
 
 def slots():
@@ -78,4 +78,7 @@ def calendar(request, first_day):
     return render(request, 'planner/index.html', context)
 
 def admin(request):
-    return render(request, 'planner/admin.html', {})
+    change_requests = [cr for cr in ChangeRequest.objects.all()]
+
+    context = { 'change_requests': change_requests }
+    return render(request, 'planner/admin.html', context)

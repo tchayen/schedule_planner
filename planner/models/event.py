@@ -14,17 +14,17 @@ class Event(models.Model):
     """{start,end}_time fields are designated to store the first time event
     has occured (most of the time it will be the beginning of the semester)
     """
-    start_date = models.DateField(default=None)
+    start_date = models.DateField()
     end_date = models.DateField(default=None, blank=True, null=True)
 
     """{start,end}_time fields are supposed to show timespan of the classes"""
-    start_time = models.TimeField(default=None)
-    end_time = models.TimeField(default=None)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
 
     """Determine amount of N weeks between each event (in most of the cases: 1 or 2)"""
     separation_count = models.IntegerField(default=1)
 
-    day_of_week = models.IntegerField(null=True)
+    day_of_week = models.IntegerField()
 
     def timespan(self):
         return self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M')

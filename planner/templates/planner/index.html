@@ -38,7 +38,7 @@
 
     .slot {
         display: flex;
-        height: 60px;
+        height: 65px;
         margin: 0 0 10px 0;
     }
 
@@ -72,16 +72,16 @@
 
 <div class="content">
     <div class="navigation">
-        <div class="navigation-div">
-            <a href="#" class="button">Next week</a>
-            <span style="margin-left: 10px">
-                Tydzień
-                <strong>{{ first_day }}</strong>
-                do
-                <strong>{{ last_day }}</strong>
-            </span>
-        </div>
         {% if user.is_authenticated %}
+            <div class="navigation-div">
+                <a href="#" class="button">Next week</a>
+                <span style="margin-left: 10px">
+                    Tydzień
+                    <strong>{{ first_day }}</strong>
+                    do
+                    <strong>{{ last_day }}</strong>
+                </span>
+            </div>
             <div class="navigation-div">
                 <span>Logged in as <strong>{{ user.get_username }}</strong></span>
                 <a href="{% url 'logout' %}" class="button">Logout</a>

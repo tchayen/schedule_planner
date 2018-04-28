@@ -58,3 +58,14 @@ Make sure you've installed both Django and psycop2 (the latter is not installed 
 ```
 pip install django psycopg2
 ```
+
+## Utilities
+Show git stats (i.e. number of lines added/removed per file and global summary) from the initial commit until now:
+```bash
+git diff --stat d28d9970 HEAD
+```
+
+Create Django superuser:
+```bash
+python3 manage.py createsuperuser
+```

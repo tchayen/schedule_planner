@@ -6,9 +6,7 @@ from itertools import groupby
 from .models import Event
 from django.core.mail import send_mail
 
-def get_events(today):
-    first_day = today - timedelta(days=today.weekday())
-    last_day = first_day + timedelta(days=5)
+def get_events(first_day, last_day):
     events = [e for e in Event.objects.exclude(
         Q(end_date__lt=first_day) | \
         Q(end_date__isnull=True) | \
@@ -37,8 +35,16 @@ def get_events(today):
 
 
 def index(request):
-    result = get_events(datetime.today())
+    today = datetime.today()
+    first_day = today - timedelta(days=today.weekday())
+    last_day = first_day + timedelta(days=5)
 
-    context = { 'days': result }
+    result = get_events(first_day, last_day)
+
+    context = {
+        'days': result,
+        'first_day': first_day.strftime('%Y-%m-%d'),
+        'last_day': last_day.strftime('%Y-%m-%d'),
+    }
 
     return render(request, 'planner/index.html', context)

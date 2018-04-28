@@ -25,7 +25,7 @@
         margin: 0 20px;
     }
 
-    .username-and-logout {
+    .navigation-div {
         display: flex;
         align-items: center;
     }
@@ -72,9 +72,17 @@
 
 <div class="content">
     <div class="navigation">
-        <a href="#" class="button">Next week</a>
+        <div class="navigation-div">
+            <a href="#" class="button">Next week</a>
+            <span style="margin-left: 10px">
+                Tydzień
+                <strong>{{ first_day }}</strong>
+                do
+                <strong>{{ last_day }}</strong>
+            </span>
+        </div>
         {% if user.is_authenticated %}
-            <div class="username-and-logout">
+            <div class="navigation-div">
                 <span>Logged in as <strong>{{ user.get_username }}</strong></span>
                 <a href="{% url 'logout' %}" class="button">Logout</a>
             </div>

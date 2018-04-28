@@ -11,7 +11,7 @@
 
     .buttons {
         display: flex;
-        margin-top: 30px;
+        margin-top: 10px;
     }
 </style>
 {% if user.is_superuser %}
@@ -29,8 +29,14 @@
                     {{ request.description|safe }}
                 </div>
                 <div class="buttons">
-                    <a href="/change_request/{{ request.id }}/accept/" class="button accept">Accept</a>
-                    <a href="/change_request/{{ request.id }}/decline/" class="button decline">Decline</a>
+                    <a
+                        href="/change_request/{{ request.id }}/accept/"
+                        class="button accept"
+                    >Accept</a>
+                    <a
+                        href="/change_request/{{ request.id }}/decline/"
+                        class="button decline"
+                    >Decline</a>
                 </div>
             </div>
         {% endfor %}

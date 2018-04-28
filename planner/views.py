@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from itertools import groupby
 from .models import Event, ChangeRequest
 from django.core.mail import send_mail
+from django.shortcuts import redirect
 
 def slots():
     return [
@@ -76,6 +77,9 @@ def calendar(request, first_day):
     }
 
     return render(request, 'planner/index.html', context)
+
+def change_request(request, id, decision):
+    return redirect(to='/admin')
 
 def admin(request):
     change_requests = [cr for cr in ChangeRequest.objects.all()]

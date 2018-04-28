@@ -8,6 +8,11 @@
         padding: 15px;
         margin-bottom: 10px;
     }
+
+    .buttons {
+        display: flex;
+        margin-top: 30px;
+    }
 </style>
 {% if user.is_superuser %}
 <div class="content">
@@ -22,6 +27,10 @@
                 <div>Requested by <strong>{{ request.author }}</strong></div>
                 <div>
                     {{ request.description|safe }}
+                </div>
+                <div class="buttons">
+                    <a href="/change_request/{{ request.id }}/accept/" class="button accept">Accept</a>
+                    <a href="/change_request/{{ request.id }}/decline/" class="button decline">Decline</a>
                 </div>
             </div>
         {% endfor %}

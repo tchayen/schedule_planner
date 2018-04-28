@@ -23,7 +23,10 @@
     <div class="regular-content">
         <h2>Change Requests</h2>
         {% for request in change_requests %}
-            <div class="change-request">
+            <div
+                class="change-request"
+                style="opacity: {{ request.accepted|yesno:'0.4,0.4,1' }}"
+            >
                 <div>Requested by <strong>{{ request.author }}</strong></div>
                 <div>
                     {{ request.description|safe }}

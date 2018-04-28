@@ -21,7 +21,7 @@ class ChangeRequest(models.Model):
 
     one_time_change = models.BooleanField(default=False)
 
-    def meritum(self):
+    def description(self):
         subject = self.event.subject
 
         start_date_string = self.change_start_date.strftime('%Y-%m-%d')

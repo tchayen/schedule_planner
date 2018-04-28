@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from .student import Student
 from .event import Event
 
@@ -6,8 +7,18 @@ def week_day():
     return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
 class ChangeRequest(models.Model):
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created_at = timezone.now()
+        self.updated_at = timezone.now()
+        return super(ChangeRequest, self).save(*args, **kwargs)
+
     author = models.ForeignKey(Student, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(editable=False)
 
     """The day since which the change will take place."""
     change_start_date = models.DateField()
@@ -20,6 +31,7 @@ class ChangeRequest(models.Model):
     new_day_of_week = models.IntegerField(blank=True, null=True)
 
     one_time_change = models.BooleanField(default=False)
+    accepted = models.NullBooleanField(blank=True, null=True)
 
     def description(self):
         subject = self.event.subject

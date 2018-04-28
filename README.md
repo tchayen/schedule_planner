@@ -19,7 +19,9 @@ python3 manage.py runserver
 - ~~create basic models~~
 - ~~display calendar properly~~
 - ~~add username/password authentication~~
-- create fixture containing realistic data
+- ~~create fixture containing realistic data~~
+- ~~add admin panel for managing change requests~~
+- handle accept/decline buttons (maybe using csrf for safety?)
 - ...
 
 ## Database

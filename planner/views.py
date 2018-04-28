@@ -42,7 +42,7 @@ def index(request):
     today = datetime.today()
     first_day = today - timedelta(days=today.weekday())
 
-    # If it is already saturday, show the next week
+    # If it is already weekend, show the next week
     if today.weekday() >= 5:
         first_day = first_day + timedelta(days=7)
 
@@ -61,6 +61,7 @@ def index(request):
     }
 
     return render(request, 'planner/index.html', context)
+
 
 def calendar(request, first_day):
     first_day = datetime.strptime(first_day, '%Y-%m-%d')
@@ -83,11 +84,16 @@ def calendar(request, first_day):
 
     return render(request, 'planner/index.html', context)
 
+
 def change_request(request, id, decision):
+    change_request = ChangeRequest.objects.get(pk=id)
+    change_request.accepted = True if decision == 'accept' else False
+    change_request.save()
     return redirect(to='/admin')
 
+
 def admin(request):
-    change_requests = [cr for cr in ChangeRequest.objects.all()]
+    change_requests = [cr for cr in ChangeRequest.objects.all().order_by('created_at')]
 
     context = { 'change_requests': change_requests }
     return render(request, 'planner/admin.html', context)

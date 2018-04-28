@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 from planner.forms import CustomAuthenticationForm, CustomPasswordResetForm, CustomSetPasswordForm
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
 
     url(r'^(?P<first_day>([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])))/$',
         views.calendar, name='calendar'),

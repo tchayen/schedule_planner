@@ -8,6 +8,28 @@
         margin: 0 10px;
     }
 
+    p {
+        margin: 0 20px;
+    }
+
+    strong {
+        color: #000;
+        font-weight: 700;
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    span {
+        margin: 0 20px;
+    }
+
+    .username-and-logout {
+        display: flex;
+        align-items: center;
+    }
+
     .day {
         flex-direction: column;
         display: flex;
@@ -50,30 +72,37 @@
     <div class="navigation">
         <a href="#" class="button">Next week</a>
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="button">Logout</a>
+            <div class="username-and-logout">
+                <span>Logged in as <strong>{{ user.get_username }}</strong></span>
+                <a href="{% url 'logout' %}" class="button">Logout</a>
+            </div>
         {% else %}
             <a href="{% url 'login' %}" class="button">Login</a>
         {% endif %}
     </div>
-    {% if days %}
-    <div class="calendar">
-        {% for day in days %}
-        <div class="day">
-            {% for slot in day %}
-            <div class="slot">
-                {% for event in slot %}
-                <div class="event no-select">
-                    <span class="title">{{ event.subject.name }}</span>
-                    <span class="time">{{ event.timespan }}</span>
+    {% if user.is_authenticated %}
+        {% if days %}
+        <div class="calendar">
+            {% for day in days %}
+            <div class="day">
+                {% for slot in day %}
+                <div class="slot">
+                    {% for event in slot %}
+                    <div class="event no-select">
+                        <span class="title">{{ event.subject.name }}</span>
+                        <span class="time">{{ event.timespan }}</span>
+                    </div>
+                    {% endfor %}
                 </div>
                 {% endfor %}
             </div>
             {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+        {% else %}
+            <p>There is nothing to do</p>
+        {% endif %}
     {% else %}
-        <p>There is nothing to do</p>
+        <p>Log in to see your plan</p>
     {% endif %}
 </div>
 {% endblock %}

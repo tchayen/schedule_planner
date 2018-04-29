@@ -11,7 +11,23 @@
 
     .buttons {
         display: flex;
+        align-items: center;
         margin-top: 10px;
+    }
+
+    .state {
+        color: #000;
+        font-weight: 700;
+    }
+
+    .button-form {
+        margin: 0;
+        width: auto;
+    }
+
+    button {
+        padding: 0 15px;
+        margin-right: 10px;
     }
 </style>
 {% if user.is_superuser %}
@@ -32,14 +48,15 @@
                     {{ request.description|safe }}
                 </div>
                 <div class="buttons">
-                    <a
-                        href="/change_request/{{ request.id }}/accept/"
-                        class="button accept"
-                    >Accept</a>
-                    <a
-                        href="/change_request/{{ request.id }}/decline/"
-                        class="button decline"
-                    >Decline</a>
+                    <form action="/change_request/{{ request.id }}/accept/" method="post" class="button-form">
+                        {% csrf_token %}
+                        <button class="accept" type="submit">Accept</button>
+                    </form>
+                    <form action="/change_request/{{ request.id }}/decline/" method="post" class="button-form">
+                        {% csrf_token %}
+                        <button class="decline" type="submit">Decline</button>
+                    </form>
+                    <div class="state">{{ request.accepted|yesno:'Accepted,Declined,' }}</div>
                 </div>
             </div>
         {% endfor %}

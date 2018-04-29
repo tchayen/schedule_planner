@@ -6,6 +6,7 @@ from itertools import groupby
 from .models import Event, ChangeRequest
 from django.core.mail import send_mail
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_protect
 
 def slots():
     return [
@@ -85,6 +86,7 @@ def calendar(request, first_day):
     return render(request, 'planner/index.html', context)
 
 
+@csrf_protect
 def change_request(request, id, decision):
     change_request = ChangeRequest.objects.get(pk=id)
     change_request.accepted = True if decision == 'accept' else False

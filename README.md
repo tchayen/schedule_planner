@@ -22,7 +22,8 @@ python3 manage.py runserver
 - ~~create fixture containing realistic data~~
 - ~~add admin panel for managing change requests~~
 - ~~handle accept/decline buttons~~
-- handle one-time exceptions
+- ~~handle one-time exceptions~~
+- ~~show events happening every two weeks only when they should be visible~~
 - ...
 
 ## Database

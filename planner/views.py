@@ -9,6 +9,13 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect
 
+class CalendarEvent():
+    def timespan(self):
+        return self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M')
+
+    def __str__(self):
+        return ""
+
 def slots():
     return [
         '08:00:00', '09:35:00', '11:15:00', '12:50:00',
@@ -16,24 +23,44 @@ def slots():
     ]
 
 def check_exceptions(event, event_exceptions):
-    condition = True
     for e in event_exceptions:
-        date = event.start_date
+        if event.date == e.replaced_date:
+            return False
+    return True
 
-        while date < e.replaced_date and date < event.end_date:
-            date += timedelta(days=7) * event.separation_count
 
-        if date == event:
-            condition = False
+def models_to_events(models, first_day, last_day):
+    first_day = first_day.date()
+    last_day = last_day.date()
 
-    return condition
+    events = []
+    for m in models:
+        date = m.start_date - timedelta(days=m.start_date.weekday()) + \
+            timedelta(days=7) + timedelta(days=m.day_of_week)
+
+        while date < last_day:
+            if date >= first_day:
+                event = CalendarEvent()
+
+                event.date = date,
+                event.start_time = m.start_time
+                event.end_time = m.end_time
+                event.day_of_week = m.day_of_week
+                event.subject = m.subject
+                event.teacher = m.teacher
+
+                events.append(event)
+
+            date += timedelta(days=7) * m.separation_count
+    return events
 
 
 def exceptions_to_events(event_exceptions):
     events = []
     for e in event_exceptions:
-        event = Event()
-        event.start_date = event.end_date = e.new_date
+        event = CalendarEvent()
+
+        event.date = e.new_date
         event.start_time = e.start_time
         event.end_time = e.end_time
         event.subject = e.event.subject
@@ -57,7 +84,7 @@ def get_events(first_day, last_day):
     event_exceptions = [ee for ee in EventException.objects.filter(
         new_date__range=(first_day, last_day))]
 
-    events += event_models
+    events += models_to_events(event_models, first_day, last_day)
     events = [e for e in events if check_exceptions(e, event_exceptions)]
     events += exceptions_to_events(event_exceptions)
     events = sorted(events, key=attrgetter('day_of_week', 'start_time'))

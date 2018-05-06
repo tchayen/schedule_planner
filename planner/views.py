@@ -14,11 +14,55 @@ def slots():
         '14:40:00', '16:15:00', '17:50:00', '19:30:00',
     ]
 
+def check_exceptions(event, event_exceptions):
+    condition = True
+    for e in event_exceptions:
+        date = event.start_date
+
+        while date < e.replaced_date and date < event.end_date:
+            date += timedelta(days=7) * event.separation_count
+
+        if date == event:
+            condition = False
+
+    return condition
+
+
+def exceptions_to_events(event_exceptions):
+    events = []
+    for e in event_exceptions:
+        event = Event()
+        event.start_date = event.end_date = e.new_date
+        event.start_time = e.start_time
+        event.end_time = e.end_time
+        event.subject = e.event.subject
+        event.teacher = e.event.teacher
+        event.day_of_week = e.new_date.weekday()
+
+        events.append(event)
+
+    return events
+
+
 def get_events(first_day, last_day):
-    events = [e for e in Event.objects.exclude(
+    events = []
+
+    # Fetch event models
+    event_models = [e for e in Event.objects.exclude(
         Q(end_date__lt=first_day) | \
-        Q(end_date__isnull=True) | \
-        Q(start_date__gte=last_day)).order_by('day_of_week', 'start_time')]
+        Q(start_date__gte=last_day)
+    ).order_by('day_of_week', 'start_time')]
+
+    event_exceptions = [ee for ee in EventException.objects.filter(
+        new_date__range=(first_day, last_day))]
+
+    events += event_models
+
+    # Filter out events moved by exceptions
+    events = [e for e in events if check_exceptions(e, event_exceptions)]
+
+    # Add exceptions as new events
+    events += exceptions_to_events(event_exceptions)
 
     # Group events by days
     days = []
@@ -60,7 +104,6 @@ def index(request):
         'previous_week': previous_week.strftime('%Y-%m-%d'),
         'next_week': next_week.strftime('%Y-%m-%d'),
     }
-
     return render(request, 'planner/index.html', context)
 
 
@@ -87,9 +130,37 @@ def calendar(request, first_day):
 
 @csrf_protect
 def change_request(request, id, decision):
-    change_request = ChangeRequest.objects.get(pk=id)
-    change_request.accepted = True if decision == 'accept' else False
-    change_request.save()
+    cr = ChangeRequest.objects.get(pk=id)
+    cr.accepted = True if decision == 'accept' else False
+    cr.save()
+
+    if cr.accepted:
+        return redirect(to='/admin')
+
+    if cr.one_time_change:
+        # TODO: fix
+        ex = EventException()
+        ex.event = cr.event
+        ex.replaced_date = cr.change_start_date
+        ex.new_date = cr.change_start_date
+
+        if cr.new_start_time and cr.new_end_time:
+            ex.start_time = cr.new_start_time
+            ex.end_time = cr.new_end_time
+        else:
+            ex.start_time = cr.event.start_time
+            ex.end_time = cr.event.end_time
+
+        if cr.new_day_of_week:
+            ex.day_of_week = cr.new_day_of_week
+        else:
+            ex.day_of_week = cr.event.day_of_week
+
+        print(ex.__dict__)
+        ex.save()
+
+    # TODO: handle other cases
+
     return redirect(to='/admin')
 
 

@@ -21,7 +21,8 @@ python3 manage.py runserver
 - ~~add username/password authentication~~
 - ~~create fixture containing realistic data~~
 - ~~add admin panel for managing change requests~~
-- handle accept/decline buttons (maybe using csrf for safety?)
+- ~~handle accept/decline buttons~~
+- handle one-time exceptions
 - ...
 
 ## Database

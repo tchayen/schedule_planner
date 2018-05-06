@@ -34,9 +34,11 @@ class ChangeRequest(models.Model):
     accepted = models.NullBooleanField(blank=True, null=True)
 
     def description(self):
+        # Alias variables
         subject = self.event.subject
 
         start_date_string = self.change_start_date.strftime('%Y-%m-%d')
+
         if self.change_end_date:
             end_date_string = self.change_end_date.strftime('%Y-%m-%d')
             end_string = 'until <strong>{0}</strong>'.format(end_date_string)
@@ -52,6 +54,7 @@ class ChangeRequest(models.Model):
 
         once = 'once' if self.one_time_change else end_string
 
+        # Print final string based on the data
         if self.new_start_time and self.new_end_time:
             return ('Move <strong>{0}</strong> to <strong>{1} {2}</strong>, {3}, ' + \
                 'starting from <strong>{4}</strong>').format(

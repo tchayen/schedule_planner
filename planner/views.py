@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from datetime import datetime, timedelta
 from itertools import groupby
-from .models import Event, ChangeRequest
+from .models import Event, EventException, ChangeRequest
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect
@@ -28,15 +28,15 @@ def get_events(first_day, last_day):
     # Add arrays containing time slots
     start_to_slot = dict(list(zip(slots(), range(len(slots())))))
 
-    result = []
+    results = []
     for index, day in enumerate(days):
         hour_slots = [[] for _ in range(len(slots()))]
         for key, group in itertools.groupby(day,
             lambda e: start_to_slot[str(e.start_time)]):
             hour_slots[key] = list(group)
-        result.append(hour_slots)
+        results.append(hour_slots)
 
-    return result
+    return results
 
 
 def index(request):
@@ -82,7 +82,6 @@ def calendar(request, first_day):
         'previous_week': previous_week.strftime('%Y-%m-%d'),
         'next_week': next_week.strftime('%Y-%m-%d'),
     }
-
     return render(request, 'planner/index.html', context)
 
 

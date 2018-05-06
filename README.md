@@ -1,6 +1,8 @@
 # schedule planner
 Python classes assignment.
 
+[screenshot](screenshot.png)
+
 *Work in progress*
 
 App for viewing current schedule of a student, handling classes that are moved permanently, happen every N weeks, are moved occasionally and so on.
@@ -21,7 +23,9 @@ python3 manage.py runserver
 - add username/password authentication
 - create fixture containing realistic data
 - add admin panel for managing change requests
+- split models into separate files
 - handle accept/decline buttons
+- use CSRF protection
 - handle one-time exceptions
 - show events happening every two weeks only when they should be visible
 - add user change report page
@@ -32,7 +36,7 @@ python3 manage.py runserver
 - add form for adding reports
 
 ## Database
-*NOTE: migrations are not version controlled*
+*NOTE: migrations are not version controlled since development is dynamic and they would break too often. Auto generate them when needed.*
 
 In case you are missing some of those:
 ```bash

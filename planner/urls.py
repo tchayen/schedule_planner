@@ -15,6 +15,8 @@ urlpatterns = [
 
     url(r'^admin/$', views.admin, name='admin'),
 
+    url(r'^report_change/$', views.report_change, name='report_change'),
+
     url(r'^login/$', auth_views.login, name='login',
         kwargs={'authentication_form': CustomAuthenticationForm}),
 

@@ -194,3 +194,12 @@ def admin(request):
 
     context = { 'change_requests': change_requests }
     return render(request, 'planner/admin.html', context)
+
+
+def report_change(request):
+    change_requests = [cr for cr in ChangeRequest.objects
+        .filter(author=request.user.id)
+        .order_by('created_at')]
+
+    context = { 'change_requests': change_requests }
+    return render(request, 'planner/report_change.html', context)

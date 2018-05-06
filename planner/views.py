@@ -1,4 +1,5 @@
 import itertools
+from operator import attrgetter
 from django.shortcuts import render
 from django.db.models import Q
 from datetime import datetime, timedelta
@@ -57,12 +58,9 @@ def get_events(first_day, last_day):
         new_date__range=(first_day, last_day))]
 
     events += event_models
-
-    # Filter out events moved by exceptions
     events = [e for e in events if check_exceptions(e, event_exceptions)]
-
-    # Add exceptions as new events
     events += exceptions_to_events(event_exceptions)
+    events = sorted(events, key=attrgetter('day_of_week', 'start_time'))
 
     # Group events by days
     days = []

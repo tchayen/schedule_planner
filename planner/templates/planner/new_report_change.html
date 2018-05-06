@@ -118,7 +118,7 @@
         <a href="{% url 'logout' %}" class="button">Logout</a>
     </div>
     <div class="regular-content">
-        <form action="POST">
+        <form method="post">
             {% csrf_token %}
             <label class="input-line">
                 <input type="text" placeholder="2018-01-01">

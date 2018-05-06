@@ -5,6 +5,7 @@ from django.db.models import Q
 from datetime import datetime, timedelta
 from itertools import groupby
 from .models import Event, EventException, ChangeRequest
+from .forms import ReportChangeForm
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect

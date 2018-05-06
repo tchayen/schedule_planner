@@ -4,11 +4,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from datetime import datetime, timedelta
 from itertools import groupby
-from .models import Event, EventException, ChangeRequest
-from .forms import ReportChangeForm
-from django.core.mail import send_mail
-from django.shortcuts import redirect
-from django.views.decorators.csrf import csrf_protect
+from ..models import Event, EventException, ChangeRequest
 
 class CalendarEvent():
     def timespan(self):
@@ -91,7 +87,7 @@ def get_events(first_day, last_day):
     events = sorted(events, key=attrgetter('day_of_week', 'start_time'))
 
     # Group events by days
-    days = [[], [], [], [], []]
+    days = [[] for _ in range(5)]
     for key, group in itertools.groupby(events, lambda e: e.day_of_week):
         days[key] = list(group)
 
@@ -152,65 +148,3 @@ def calendar(request, first_day):
         'next_week': next_week.strftime('%Y-%m-%d'),
     }
     return render(request, 'planner/index.html', context)
-
-
-@csrf_protect
-def change_request(request, id, decision):
-    cr = ChangeRequest.objects.get(pk=id)
-    cr.accepted = True if decision == 'accept' else False
-    cr.save()
-
-    if cr.accepted:
-        return redirect(to='/admin')
-
-    if cr.one_time_change:
-        # TODO: fix
-        ex = EventException()
-        ex.event = cr.event
-        ex.replaced_date = cr.change_start_date
-        ex.new_date = cr.change_start_date
-
-        if cr.new_start_time and cr.new_end_time:
-            ex.start_time = cr.new_start_time
-            ex.end_time = cr.new_end_time
-        else:
-            ex.start_time = cr.event.start_time
-            ex.end_time = cr.event.end_time
-
-        if cr.new_day_of_week:
-            ex.day_of_week = cr.new_day_of_week
-        else:
-            ex.day_of_week = cr.event.day_of_week
-
-        print(ex.__dict__)
-        ex.save()
-
-    # TODO: handle other cases
-
-    return redirect(to='/admin')
-
-
-def admin(request):
-    change_requests = [cr for cr in ChangeRequest.objects.all().order_by('created_at')]
-
-    context = { 'change_requests': change_requests }
-    return render(request, 'planner/admin.html', context)
-
-
-def report_change(request):
-    change_requests = [cr for cr in ChangeRequest.objects
-        .filter(author=request.user.id)
-        .order_by('created_at')]
-
-    context = { 'change_requests': change_requests }
-    return render(request, 'planner/report_change.html', context)
-
-
-def new_report_change(request):
-    if request.method == 'POST':
-        form = ReportChangeForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('/report_change')
-
-    context = { }
-    return render(request, 'planner/new_report_change.html', context)

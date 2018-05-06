@@ -27,6 +27,8 @@ DEBUG = True
 
 LOGIN_REDIRECT_URL = '/'
 
+STATIC_URL = '/static/'
+
 ALLOWED_HOSTS = []
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -17,6 +17,8 @@ urlpatterns = [
 
     url(r'^report_change/$', views.report_change, name='report_change'),
 
+    url(r'^report_change/new/$', views.new_report_change, name='new_report_change'),
+
     url(r'^login/$', auth_views.login, name='login',
         kwargs={'authentication_form': CustomAuthenticationForm}),
 

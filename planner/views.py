@@ -203,3 +203,8 @@ def report_change(request):
 
     context = { 'change_requests': change_requests }
     return render(request, 'planner/report_change.html', context)
+
+
+def new_report_change(request):
+    context = { }
+    return render(request, 'planner/new_report_change.html', context)

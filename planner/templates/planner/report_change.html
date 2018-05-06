@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .regular-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .button-row {
+        display: flex;
+        margin: 0 0 20px 0;
+    }
+</style>
 <div class="content">
     <div class="navigation">
         <a href="/" class="button">Back to calendar</a>
@@ -8,7 +19,9 @@
     </div>
     <div class="regular-content">
         <h2>Change Requests</h2>
-        <a href="" class="button">New request</a>
+        <div class="button-row">
+            <a href="new" class="button">New request</a>
+        </div>
         {% for request in change_requests %}
             <div
                 class="change-request"

@@ -90,9 +90,9 @@ def get_events(first_day, last_day):
     events = sorted(events, key=attrgetter('day_of_week', 'start_time'))
 
     # Group events by days
-    days = []
+    days = [[], [], [], [], []]
     for key, group in itertools.groupby(events, lambda e: e.day_of_week):
-        days.append(list(group))
+        days[key] = list(group)
 
     # Add arrays containing time slots
     start_to_slot = dict(list(zip(slots(), range(len(slots())))))

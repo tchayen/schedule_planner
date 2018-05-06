@@ -24,6 +24,8 @@ python3 manage.py runserver
 - ~~handle accept/decline buttons~~
 - ~~handle one-time exceptions~~
 - ~~show events happening every two weeks only when they should be visible~~
+- ~~add user change report page~~
+- add form for adding reports
 - ...
 
 ## Database

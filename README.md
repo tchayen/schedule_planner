@@ -13,20 +13,23 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-## Roadmap
-- ~~setup the Django project~~
-- ~~create and connect to the database~~
-- ~~create basic models~~
-- ~~display calendar properly~~
-- ~~add username/password authentication~~
-- ~~create fixture containing realistic data~~
-- ~~add admin panel for managing change requests~~
-- ~~handle accept/decline buttons~~
-- ~~handle one-time exceptions~~
-- ~~show events happening every two weeks only when they should be visible~~
-- ~~add user change report page~~
+## Done
+- setup the Django project
+- create and connect to the database
+- create basic models
+- display calendar properly
+- add username/password authentication
+- create fixture containing realistic data
+- add admin panel for managing change requests
+- handle accept/decline buttons
+- handle one-time exceptions
+- show events happening every two weeks only when they should be visible
+- add user change report page
+- split views into separate files
+- split JS and some CSS in static files
+
+## TODO
 - add form for adding reports
-- ...
 
 ## Database
 *NOTE: migrations are not version controlled*

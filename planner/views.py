@@ -206,5 +206,10 @@ def report_change(request):
 
 
 def new_report_change(request):
+    if request.method == 'POST':
+        form = ReportChangeForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/report_change')
+
     context = { }
     return render(request, 'planner/new_report_change.html', context)

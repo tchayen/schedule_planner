@@ -1,12 +1,95 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    label {
+        display: inline-block;
+    }
+    input[type=radio],
+    input[type=checkbox] {
+        display: none;
+    }
+
+    .input-line {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .checkmark {
+        position: absolute;
+        height: 21px;
+        width: 21px;
+        border-radius: 4px;
+        background-color: #eee;
+    }
+
+    .input-line input[type=checkbox]:checked ~ .checkmark {
+        background-color: #0050ff;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .input-line input[type=checkbox]:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .input-line .checkmark:after {
+        left: 6px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .input-line span {
+        color: #333;
+        font-size: 15px;
+        margin-left: 30px;
+    }
+</style>
 <div class="content">
     <div class="navigation">
         <a href="/report_change" class="button">Back to reports</a>
         <a href="{% url 'logout' %}" class="button">Logout</a>
     </div>
     <div class="regular-content">
+        <form action="POST">
+            {% csrf_token %}
+            <label class="input-line">
+                <input type="text" placeholder="2018-01-01">
+            </label>
+            <label class="input-line">
+                <input type="text" placeholder="2018-01-01">
+            </label>
+            <label class="input-line">
+                <input type="text" placeholder="00:00">
+            </label>
+            <label class="input-line">
+                <input type="text" placeholder="00:00">
+            </label>
+            <select>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+            </select>
+            <label class="input-line">
+                <input type="checkbox">
+                <div class="checkmark"></div>
+                <span>Only once</span>
+            </label>
+            <button type="submit">Report change</button>
+        </form>
     </div>
 </div>
 {% endblock %}

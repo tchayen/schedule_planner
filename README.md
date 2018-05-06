@@ -1,7 +1,7 @@
 # schedule planner
 Python classes assignment.
 
-[screenshot](screenshot.png)
+![screenshot](screenshot.png)
 
 *Work in progress*
 

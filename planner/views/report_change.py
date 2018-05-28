@@ -9,11 +9,10 @@ def report_change(request):
     context = { 'change_requests': change_requests }
     return render(request, 'planner/report_change.html', context)
 
-def new_report_change(request):
+def new_report_change(request, id):
     if request.method == 'POST':
         form = ReportChangeForm(request.POST)
         if form.is_valid():
             return HttpResponseRedirect('/report_change')
 
-    context = { }
-    return render(request, 'planner/new_report_change.html', context)
+    return render(request, 'planner/new_report_change.html', {})

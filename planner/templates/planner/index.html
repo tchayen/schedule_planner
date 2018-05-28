@@ -103,7 +103,7 @@
                 {% if user.is_superuser %}
                     <a href="/admin" class="button">Admin panel</a>
                 {% else %}
-                    <a href="/report_change" class="button">Report change</a>
+                    <a href="/report_change" class="button">Your reports</a>
                 {% endif %}
                 <a href="{% url 'logout' %}" class="button">Logout</a>
             </div>

@@ -39,6 +39,7 @@ def models_to_events(models, first_day, last_day):
             if date >= first_day:
                 event = CalendarEvent()
 
+                event.id = m.id
                 event.date = date,
                 event.start_time = m.start_time
                 event.end_time = m.end_time

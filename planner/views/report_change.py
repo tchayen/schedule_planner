@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from ..models import ChangeRequest
+from ..forms import ReportChangeForm
 
 def report_change(request):
     change_requests = [cr for cr in ChangeRequest.objects

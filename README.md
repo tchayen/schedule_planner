@@ -15,7 +15,9 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-## Done
+## Summary
+
+### Done
 - setup the Django project
 - create and connect to the database
 - create basic models
@@ -31,9 +33,27 @@ python3 manage.py runserver
 - add user change report page
 - split views into separate files
 - split JS and some CSS in static files
+- add icon pack
 
-## TODO
+### TODO
 - add form for adding reports
+
+## Mini-docs
+Application features:
+
+### Models
+- Event
+- Student
+- Teacher
+- Subject
+- ChangeRequest
+- EventException
+
+### Views
+- homepage with calendar
+- summary of user's reports
+- new report form
+- reports admin panel
 
 ## Database
 *NOTE: migrations are not version controlled since development is dynamic and they would break too often. Auto generate them when needed.*

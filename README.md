@@ -1,6 +1,4 @@
 # schedule planner
-Python classes assignment.
-
 ![screenshot](screenshot.png)
 
 *Work in progress*
@@ -8,11 +6,10 @@ Python classes assignment.
 App for viewing current schedule of a student, handling classes that are moved permanently, happen every N weeks, are moved occasionally and so on.
 
 ## Running
-Just like a regular Django app:
 ```bash
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
 ```
 
 ## Summary
@@ -35,9 +32,6 @@ python3 manage.py runserver
 - split JS and some CSS in static files
 - add icon pack
 
-### TODO
-- add form for adding reports
-
 ## Mini-docs
 Application features:
 
@@ -47,7 +41,7 @@ Application features:
 - Teacher
 - Subject
 - ChangeRequest
-- EventException
+- SingularChange
 
 ### Views
 - homepage with calendar

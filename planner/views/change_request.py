@@ -2,6 +2,9 @@ from django.shortcuts import redirect
 from ..models import SingularChange, ChangeRequest
 from django.views.decorators.csrf import csrf_protect
 
+def week_day():
+    return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
 def description(request):
     # Alias variables
     subject = request.event.subject

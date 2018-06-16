@@ -129,7 +129,6 @@ def index(request):
     }
     return render(request, 'planner/index.html', context)
 
-
 def calendar(request, first_day):
     first_day = datetime.strptime(first_day, '%Y-%m-%d')
     last_day = first_day + timedelta(days=5)

@@ -1,5 +1,5 @@
 from .change_request import ChangeRequest
-from .event_exception import EventException
+from .singular_change import SingularChange
 from .event import Event
 from .student import Student
 from .subject import Subject

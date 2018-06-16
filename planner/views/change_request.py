@@ -12,8 +12,7 @@ def change_request(request, id, decision):
         return redirect(to='/admin')
 
     if cr.one_time_change:
-        # TODO: fix
-        ex = EventException()
+        ex = SingularChange()
         ex.event = cr.event
         ex.replaced_date = cr.change_start_date
         ex.new_date = cr.change_start_date
@@ -32,7 +31,5 @@ def change_request(request, id, decision):
 
         print(ex.__dict__)
         ex.save()
-
-    # TODO: handle other cases
 
     return redirect(to='/admin')

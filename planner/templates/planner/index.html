@@ -119,7 +119,7 @@
                 {% for slot in day %}
                 <div class="slot">
                     {% for event in slot %}
-                    <div class="event no-select" style="background-color: {{ event.subject.color }}">
+                    <div class="event no-select c{{ event.subject.color }}">
                         <div class="report">
                             <a href="/report_change/new/{{ event.id }}">
                                 <i class="fas fa-exclamation-triangle"></i>
